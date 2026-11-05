@@ -152,7 +152,7 @@ const products = [
                     ${featuresHTML}
                     
                     <div class="size-guide-box">
-                        <strong>AI SIZE RECOMMENDER</strong>
+                        <strong>SIZE SUGGESTION (DEMO)</strong>
                         <div class="size-inputs">
                             <input type="number" id="height-in" placeholder="Height (cm)">
                             <input type="number" id="weight-in" placeholder="Weight (kg)">
