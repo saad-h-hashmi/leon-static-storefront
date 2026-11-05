@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEON | Define Your Reality</title>
+    <meta name="description" content="LEON is a frontend-only fashion storefront concept featuring product discovery, category filters, quick views, and a shopping-cart demo.">
+    <link rel="icon" href="images/favicon.jpg" type="image/jpeg">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="preloader">LEON. LOADING</div>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    <div class="grain-overlay"></div>
+
+    <nav>
+        <div class="hamburger" onclick="toggleMobileMenu()" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">☰</div>
+        <div class="logo" onclick="router('home')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">LEON.</div>
+        <ul class="nav-links">
+            <li onclick="router('home')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Home</li>
+            <li onclick="filterCategory('men')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Men</li>
+            <li onclick="filterCategory('women')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Women</li>
+            <li onclick="filterCategory('accessories')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Accessories</li>
+        </ul>
+        <div class="nav-actions">
+            <div class="theme-toggle" onclick="toggleTheme()" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">◑</div>
+            <div onclick="router('auth')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">LOGIN</div>
+            <div onclick="toggleCart()" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">CART (<span id="cart-count">0</span>)</div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a onclick="toggleMobileMenu(); router('home')">Home</a>
+        <a onclick="toggleMobileMenu(); filterCategory('men')">Men</a>
+        <a onclick="toggleMobileMenu(); filterCategory('women')">Women</a>
+        <a onclick="toggleMobileMenu(); filterCategory('accessories')">Accessories</a>
+        <a onclick="toggleMobileMenu(); toggleCart()">Cart</a>
+        <a style="font-size:1rem; color:var(--accent); margin-top:2rem;" onclick="toggleMobileMenu()">CLOSE [X]</a>
+    </div>
+
+    <div id="home" class="page active">
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline poster="images/bomber.avif">
+                <source src="images/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div style="z-index: 2;">
+                <h1 class="reveal">Define Your<br>Reality</h1>
+                <button class="hero-btn reveal" onclick="filterCategory('all')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Explore Collection</button>
+            </div>
+        </section>
+
+        <section class="lookbook-section reveal">
+            <div class="lookbook-card">
+                <h2 style="font-size: 3rem; font-family: var(--font-display); margin-bottom: 1rem; text-transform: uppercase;">The 2026 Editorial</h2>
+                <p style="line-height: 1.6; margin-bottom: 2rem;">Blurring the lines between high fashion and utilitarian streetwear. Designed in New York, worn globally.</p>
+                <button class="btn-black" onclick="filterCategory('all')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">VIEW LOOKBOOK</button>
+            </div>
+        </section>
+
+        <div class="marquee">
+            <div class="marquee-content">
+                NEW SEASON // DROP 001 AVAILABLE NOW // FREE SHIPPING WORLDWIDE // LIMITED EDITION // PARIS // TOKYO // NEW YORK // LEON STUDIOS // 
+            </div>
+        </div>
+
+        <section class="featured-drop reveal">
+            <div class="drop-img">
+                <img src="images/bomber.avif" alt="Urban Bomber">
+            </div>
+            <div class="drop-info">
+                <div style="color:var(--accent); font-weight:bold; letter-spacing:2px; margin-bottom:1rem;">EXCLUSIVE DROP</div>
+                <h2 style="font-family: var(--font-display); font-size: 4rem; margin-bottom: 1.5rem; line-height: 1;">The Urban<br>Bomber</h2>
+                <div class="drop-timer" id="drop-timer"></div>
+                <p style="margin-bottom: 2rem; line-height: 1.6; opacity: 0.8;">Engineered for the modern metropolis. Constructed from a high-density, water-resistant nylon shell with premium down filling for insulation. Limited to 500 units worldwide.</p>
+                <button class="hero-btn" style="border-color: var(--text-main); color: var(--text-main);" onclick="filterCategory('men')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">SHOP NOW</button>
+            </div>
+        </section>
+
+        <section class="cat-grid reveal">
+            <div class="cat-item" onclick="filterCategory('men')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">
+                <img src="images/cat-men.jpg" alt="Men’s clothing collection">
+                <div class="cat-text">Men</div>
+            </div>
+            <div class="cat-item" onclick="filterCategory('women')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">
+                <img src="images/cat-women.jpg" alt="Women’s clothing collection">
+                <div class="cat-text">Women</div>
+            </div>
+            <div class="cat-item" onclick="filterCategory('accessories')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">
+                <img src="images/cat-acc.avif" alt="Accessories collection">
+                <div class="cat-text">Objects</div>
+            </div>
+        </section>
+    </div>
+
+    <div id="shop" class="page">
+        <div id="category-hero-container"></div>
+        <div class="container">
+            <div class="product-grid" id="product-grid-container"></div>
+        </div>
+    </div>
+
+    <div id="product-detail" class="page">
+        <div class="container">
+            <button onclick="router('shop')" style="background:none; border:none; text-decoration:underline; margin-bottom: 2rem; color:var(--text-main);" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">&larr; BACK</button>
+            <div class="pd-container" id="detail-content"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="qv-modal" onclick="closeQuickView(event)">
+        <div class="qv-content" id="qv-content"></div>
+    </div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div style="display:flex; justify-content:space-between;">
+            <h2>CART</h2>
+            <span onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem;" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">&times;</span>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto; margin: 2rem 0;"></div>
+        <div>
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem;">
+                <span>TOTAL</span><span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn-black" onclick="goToCheckout()" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">CHECKOUT</button>
+        </div>
+    </div>
+
+    <div id="auth" class="page"><div class="auth-container"><h2>ACCOUNT ACCESS — DEMO</h2><p class="demo-notice">This is a frontend prototype. Account registration and authentication are not connected. Do not enter a real password.</p><form onsubmit="handleAuth(event)"><input type="email" placeholder="EMAIL (DEMO ONLY)" aria-label="Demo email address" required autocomplete="off"><button type="submit" class="btn-black" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">CONTINUE DEMO</button></form></div></div>
+    <div id="checkout" class="page"><div class="checkout-container"><h2>DEMO CHECKOUT</h2><p class="demo-notice" role="note">Frontend demonstration only. No order backend or payment processor is connected. Do not enter real shipping or payment information. The button below only demonstrates the checkout interaction.</p><button type="button" class="btn-black" onclick="processPayment()" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">PLACE DEMO ORDER</button><button type="button" class="btn-black" onclick="router('shop')" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">CONTINUE SHOPPING</button></div></div>
+
+    <footer>
+        <div><h3 style="color:var(--accent); margin-bottom:1rem;">About</h3><p style="color:#666; line-height:1.6;">Leon is a concept store redefining the boundaries between high fashion and street culture. Established 2026.</p></div>
+        <div><h3 style="color:var(--accent); margin-bottom:1rem;">Support</h3><a href="#" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Contact Us</a><a href="#" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Shipping</a></div>
+        <div><h3 style="color:var(--accent); margin-bottom:1rem;">Social</h3><a href="#" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Instagram</a><a href="#" onmouseenter="hoverCursor()" onmouseleave="leaveCursor()">Twitter</a></div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
