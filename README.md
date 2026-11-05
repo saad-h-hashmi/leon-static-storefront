@@ -12,7 +12,7 @@ theme switching, responsive navigation, and editorial video sections.
 - Product quick-view and detail views.
 - In-memory shopping cart with item count and total.
 - Light/dark theme toggle.
-- Product-size recommendation UI.
+- Simple weight-based size-suggestion demo (not an AI model).
 - Editorial image and video sections.
 - Countdown display for a promotional drop.
 
