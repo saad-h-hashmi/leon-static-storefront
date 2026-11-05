@@ -168,13 +168,23 @@ const products = [
         }
 
         function calcSize() {
-            const h = document.getElementById('height-in').value;
-            const w = document.getElementById('weight-in').value;
+            const height = Number(document.getElementById('height-in').value);
+            const weight = Number(document.getElementById('weight-in').value);
+
+            if (!Number.isFinite(height) || !Number.isFinite(weight) ||
+                height <= 0 || weight <= 0) {
+                alert("Please enter a valid positive height and weight.");
+                return;
+            }
+
+            // Simple demonstration heuristic; this is not an AI sizing model.
             let size = "M";
-            if (h && w) {
-                if(w < 60) size = "S"; else if(w > 85) size = "L"; else if(w > 100) size = "XL";
-                document.getElementById('size-result').innerText = "RECOMMENDED SIZE: " + size;
-            } else { alert("Please enter height and weight"); }
+            if (weight > 100) size = "XL";
+            else if (weight > 85) size = "L";
+            else if (weight < 60) size = "S";
+
+            document.getElementById('size-result').innerText =
+                "SUGGESTED SIZE (DEMO): " + size;
         }
 
         function toggleCart() { 
